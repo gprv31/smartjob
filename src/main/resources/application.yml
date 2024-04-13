@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+    databaseName:
+    serverName:
+    username:
+    password:
+  h2:
+    console:
+    enabled: true
+    path: /h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    openInView: false
+    show_sql: false
+    hibernate:
+      ddl-auto: validate
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+validation:
+  email-regex: "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
+token:
+  signing:
+    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+info:
+  project:
+    title: "User Information Web Application"
+    description: "An user information web application"
+    version: "1.0.0"
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
+springdoc:
+  swagger-ui:
+    config-url: /v3/api-docs/swagger-config
+    disable-swagger-default-url: true
+    url: /v3/api-docs
