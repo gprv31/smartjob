@@ -34,19 +34,11 @@ public class SecurityConfiguration {
     private final GetUserInfoUseCase getUserInfoUseCase;
 
     @Bean
-    WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"),
-                new AntPathRequestMatcher("/swagger-ui/**"),
-                new AntPathRequestMatcher("/swagger-ui.html")
-        );
-    }
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers("/save").permitAll();
-                    request.requestMatchers( "/swagger-ui/index.html").permitAll();
-                    request.requestMatchers( "/swagger-ui.html").permitAll();
+                    request.requestMatchers( "/swagger-ui/**", "/v3/api-docs/**").permitAll();
                     request.anyRequest().authenticated();
                 })
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
